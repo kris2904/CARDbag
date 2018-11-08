@@ -2,17 +2,12 @@ package com.example.cardgit;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        card = new Card();
+        setSupportActionBar(toolbar);setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Добавить карту");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -38,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         category = findViewById(R.id.Category);
         discount = findViewById(R.id.Discount);
 
-        card = new Card();
+
     }
 
     @Override
@@ -62,7 +59,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(Card.class.getSimpleName(),card);
         setResult(Activity.RESULT_OK, intent);
         finish();
-    }
- {
     }
 }
