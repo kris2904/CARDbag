@@ -31,6 +31,8 @@ public class CardListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Мои карты");
 
+
+
         rlCard = findViewById(R.id.rl_with_card);
         rlCard.setVisibility(View.GONE);
 
