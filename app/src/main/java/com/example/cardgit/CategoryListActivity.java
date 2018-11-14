@@ -1,5 +1,6 @@
 package com.example.cardgit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,7 @@ import android.view.MenuInflater;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-public class CategoryListActivity extends AppCompatActivity {
+public class CategoryListActivity extends AppCompatActivity implements CategoryAdapter.onItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +26,12 @@ public class CategoryListActivity extends AppCompatActivity {
        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        CategoryAdapter adapter = new CategoryAdapter(this, DataBaseHelper.getCategories(), (CategoryAdapter.onItemClickListener) this);
+        CategoryAdapter adapter = new CategoryAdapter(this, DataBaseHelper.getCategories(),this);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
         //layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
-
-
 
 
     @Override
@@ -43,4 +41,11 @@ public class CategoryListActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onItemClick(Category item) {
+        Intent intent = new Intent(this,CardAddActivity.class);
+        intent.putExtra(Category.class.getSimpleName(), item);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 }

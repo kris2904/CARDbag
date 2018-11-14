@@ -13,6 +13,6 @@ public class CategoryVH extends RecyclerView.ViewHolder {
 
     public CategoryVH(@NonNull View itemView) {
         super(itemView);
-        txtCategoryName = (TextView) itemView.findViewById(R.id.cv);
+        txtCategoryName = (TextView) itemView.findViewById(R.id.tvTitle);
 
     }}

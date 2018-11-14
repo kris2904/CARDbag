@@ -85,7 +85,7 @@ public class CardListActivity extends AppCompatActivity {
 
 
     public void onClick(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CardAddActivity.class);
         startActivityForResult(intent, ADD_CARD);
     }
 }

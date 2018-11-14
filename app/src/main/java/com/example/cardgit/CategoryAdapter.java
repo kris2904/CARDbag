@@ -16,7 +16,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryVH> {
 
     public CategoryAdapter(Context context, List<Category> categories, onItemClickListener clickListener) {
         this.categories = categories;
-        this.inflater = LayoutInflater.from(context);;
+        this.inflater = LayoutInflater.from(context);
         this.clickListener= clickListener;
     }
 
