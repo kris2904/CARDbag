@@ -1,12 +1,18 @@
 package com.example.cardgit;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Card  implements Serializable {
 
     private String name;
     private String category;
     private String discount;
+    private List<Photo> photo;
+
+    public List<Photo> getPhoto() {
+        return photo;
+    }
 
     public String getName() {
         return name;

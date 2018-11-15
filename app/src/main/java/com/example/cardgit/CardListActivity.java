@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -11,15 +13,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CardListActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private RelativeLayout rlCard;
+    private RecyclerView rlCard;
     private RelativeLayout rlNoCard;
     private TextView tvName;
     private TextView tvCategory;
     private TextView tvDiscount;
+    private RecyclerView recyclerView;
     private static final int ADD_CARD = 1;
+    private List<Card> cards;
 
 
     @Override
@@ -32,15 +39,19 @@ public class CardListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Мои карты");
 
 
+        cards = new ArrayList<>();
 
-        rlCard = findViewById(R.id.rl_with_card);
+        rlCard = findViewById(R.id.rvCard);
         rlCard.setVisibility(View.GONE);
 
         rlNoCard = findViewById(R.id.rl_no_card);
 
-        tvName = findViewById(R.id.tvName);
-        tvCategory = findViewById(R.id.tvCategory);
-        tvDiscount = findViewById(R.id.tvDiscount);
+        List<Photo> phList = DataBaseHelper.getPhoto();
+        PhotoAdapter photoAdapter = new PhotoAdapter(this, phList);
+
+        recyclerView = findViewById(R.id.rvCard);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(photoAdapter);
 
     }
 
@@ -70,14 +81,9 @@ public class CardListActivity extends AppCompatActivity {
                     if (card == null) {
                         return;
                     }
-
-                    String name = card.getName();
-                    String category = card.getCategory();
-                    String discount = card.getDiscount();
-
-                    tvName.setText(name);
-                    tvCategory.setText(category);
-                    tvDiscount.setText("Скидка " + discount + "%");
+                    CardAdapter adapter = new CardAdapter(this, cards);
+                    recyclerView.setAdapter(adapter);
+                    adapter.insertItem(card);
                 }
       }
         }

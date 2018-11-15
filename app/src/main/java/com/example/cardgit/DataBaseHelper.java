@@ -20,4 +20,12 @@ public class DataBaseHelper {
     public static List<Category> getCategories() {
         return categories;
     }
+
+    public static  List<Photo> photo = Arrays.asList(
+            new Photo(R.drawable.lenta),
+            new Photo(R.drawable.lenta)
+    );
+    public static List<Photo> getPhoto() {
+        return photo;
+    }
 }

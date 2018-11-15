@@ -41,45 +41,15 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_with_card"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test"
-            android:textColor="#333333" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize">
+        </android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:id="@+id/img_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tvName"
-            android:src="@drawable/lenta" />
 
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/img_card"
-            android:text="test"
-            android:textColor="#9B9B9B"/>
-
-        <TextView
-            android:id="@+id/tvDiscount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/img_card"
-            android:layout_alignParentRight="true"
-            android:text="test"
-            android:textColor="#009788"/>
-
-    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addCard"
