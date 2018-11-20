@@ -17,15 +17,10 @@ public class DataBaseHelper {
             new Category(3, "Красота"),
             new Category(4, "Автомобиль"));
 
-    public static List<Category> getCategories() {
+   public static List<Category> getCategories() {
         return categories;
     }
+    public static List<Card> cards = Arrays.asList();
 
-    public static  List<Photo> photo = Arrays.asList(
-            new Photo(R.drawable.lenta),
-            new Photo(R.drawable.lenta)
-    );
-    public static List<Photo> getPhoto() {
-        return photo;
-    }
+
 }

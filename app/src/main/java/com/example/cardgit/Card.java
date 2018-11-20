@@ -3,15 +3,19 @@ package com.example.cardgit;
 import java.io.Serializable;
 import java.util.List;
 
-public class Card  implements Serializable {
+public class   Card  implements Serializable {
 
     private String name;
     private String category;
     private String discount;
     private List<Photo> photo;
 
-    public List<Photo> getPhoto() {
-        return photo;
+  public List<Photo> getPhoto() {
+      return photo;
+    }
+
+    public void setPhoto(List<Photo> photo) {
+        this.photo = photo;
     }
 
     public String getName() {

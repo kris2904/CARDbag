@@ -21,10 +21,10 @@ public class CardListActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView rlCard;
     private RelativeLayout rlNoCard;
-    private TextView tvName;
-    private TextView tvCategory;
-    private TextView tvDiscount;
-    private RecyclerView recyclerView;
+   // private TextView tvName;
+   // private TextView tvCategory;
+   // private TextView tvDiscount;
+  //  private RecyclerView recyclerView;
     private static final int ADD_CARD = 1;
     private List<Card> cards;
 
@@ -43,15 +43,8 @@ public class CardListActivity extends AppCompatActivity {
 
         rlCard = findViewById(R.id.rvCard);
         rlCard.setVisibility(View.GONE);
-
+        rlCard.setLayoutManager(new LinearLayoutManager(this));
         rlNoCard = findViewById(R.id.rl_no_card);
-
-        List<Photo> phList = DataBaseHelper.getPhoto();
-        PhotoAdapter photoAdapter = new PhotoAdapter(this, phList);
-
-        recyclerView = findViewById(R.id.rvCard);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(photoAdapter);
 
     }
 
@@ -66,9 +59,9 @@ public class CardListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-      switch (requestCode){
-            case ADD_CARD:
                 if (resultCode == RESULT_OK) {
+                    switch (requestCode){
+                        case ADD_CARD:
                     rlCard.setVisibility(View.VISIBLE);
                     rlNoCard.setVisibility(View.GONE);
 
@@ -81,8 +74,9 @@ public class CardListActivity extends AppCompatActivity {
                     if (card == null) {
                         return;
                     }
+
                     CardAdapter adapter = new CardAdapter(this, cards);
-                    recyclerView.setAdapter(adapter);
+                    rlCard.setAdapter(adapter);
                     adapter.insertItem(card);
                 }
       }
