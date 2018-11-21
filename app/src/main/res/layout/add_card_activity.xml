@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll"
-            android:background="#FAFAFA" />
+            android:background="#FAFAFA"
+            android:elevation="4dp"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textinputlayout"
@@ -25,7 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:hint="Название карты" />
+            android:hint="Название карты"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="15dp"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -40,7 +43,9 @@
             android:layout_centerVertical="true"
             android:hint="Категория"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:onClick="etCategory"/>
+            android:onClick="etCategory"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="15dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -55,12 +60,20 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:hint="Процент скидки" />
+            android:hint="Процент скидки"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="15dp"/>
     </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/button12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="Сфотографировать"/>
+        android:backgroundTint="#009788"
+        android:text="Сохранить"
+        android:layout_marginTop="28dp"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="15dp"/>
 </LinearLayout>
