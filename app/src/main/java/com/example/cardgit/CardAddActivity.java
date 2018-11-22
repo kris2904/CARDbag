@@ -62,7 +62,7 @@ public class CardAddActivity extends AppCompatActivity {
         card.setCategory(edCategory.getText().toString());
         card.setDiscount(edDiscount.getText().toString());
 
-        List<Photo> photos = new ArrayList<>();
+        ArrayList<Photo> photos = new ArrayList<>();
         photos.add(new Photo(R.drawable.lenta));
         photos.add(new Photo(R.drawable.lenta));
         card.setPhoto(photos);

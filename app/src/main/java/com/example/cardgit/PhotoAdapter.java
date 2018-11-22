@@ -14,7 +14,8 @@ import java.util.List;
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoVH>{
 
     private List<Photo> photoList;
-    private Context context;
+     Context context;
+    private LayoutInflater layoutInflater;
 
 
 
@@ -23,12 +24,15 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoVH>{
         this.context = context;
         this.photoList = photo;
 
+        this.layoutInflater = LayoutInflater.from(context);
+
+
     }
 
     @NonNull
     @Override
     public PhotoVH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_photo_card, viewGroup, false);
+        View view = layoutInflater.inflate(R.layout.item_photo_card, viewGroup, false);
         return new PhotoVH(view);
     }
 
@@ -36,6 +40,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoVH>{
     public void onBindViewHolder(@NonNull PhotoVH photoVH, int position) {
         final Photo photo = photoList.get(position);
         photoVH.ivPhoto.setImageResource(photo.getIconSources());
+
 
     }
 

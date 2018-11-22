@@ -3,10 +3,12 @@ package com.example.cardgit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
@@ -29,8 +31,12 @@ public class CategoryListActivity extends AppCompatActivity implements CategoryA
         CategoryAdapter adapter = new CategoryAdapter(this, DataBaseHelper.getCategories(),this);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         //layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
@@ -39,6 +45,17 @@ public class CategoryListActivity extends AppCompatActivity implements CategoryA
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_activity_category, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
