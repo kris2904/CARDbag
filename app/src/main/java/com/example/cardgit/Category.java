@@ -6,6 +6,9 @@ public class Category implements Serializable {
     private String name;
     private int id;
 
+    public Category() {
+    }
+
     public Category(int id, String name)
     {
         this.id=id;

@@ -12,6 +12,10 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 public class CardAddActivity extends AppCompatActivity {
 
@@ -51,7 +55,6 @@ public class CardAddActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -59,23 +62,52 @@ public class CardAddActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         card.setName(edName.getText().toString());
-        card.setCategory(edCategory.getText().toString());
+        //card.setCategory(edCategory.getText().toString());
         card.setDiscount(edDiscount.getText().toString());
+
 
         ArrayList<Photo> photos = new ArrayList<>();
         photos.add(new Photo(R.drawable.lenta));
         photos.add(new Photo(R.drawable.lenta));
         card.setPhoto(photos);
 
-        Intent intent = new Intent(this, CardListActivity.class);
-        intent.putExtra(Card.class.getSimpleName(), card);
-        setResult(RESULT_OK, intent);
+        Random random = new Random();
+        int id = random.nextInt(2000);
+        card.setId(id);
+     Intent intent = new Intent(this, CardListActivity.class);
+       intent.putExtra(Card.class.getSimpleName(), card);
+       setResult(RESULT_OK, intent);
         finish();
     }
 
     public void etCategory(View view) {
         Intent intent = new Intent(this, CategoryListActivity.class);
         startActivityForResult(intent, ADD_CATEGORY);
+    }
+    private void  addCard(Card card){
+
+        Realm realm=Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(map2Realm(card));
+
+            }
+        });
+    }
+    private CardRealm map2Realm(Card card){
+        CardRealm cardRealm = new CardRealm();
+        cardRealm.setId(card.getId());
+        cardRealm.setName(card.getName());
+        cardRealm.setDiscount(card.getDiscount());
+        cardRealm.setCategory(categoreMap2Realm(card.getCategory()));
+        return cardRealm;
+    }
+    private CategoryRealm categoreMap2Realm(Category category) {
+        CategoryRealm categoryRealm = new CategoryRealm();
+        categoryRealm.setId(category.getId());
+        categoryRealm.setName(category.getName());
+        return categoryRealm;
     }
 
     @Override
@@ -97,7 +129,20 @@ public class CardAddActivity extends AppCompatActivity {
                     }
                     String nameCateg = category.getName();
                     edCategory.setText(nameCateg);
+                    card.setCategory(category);
             }
         }
+
     }
-}
+    private RealmList<PotoRealm> potoMap2Realm(List<Photo> photo){
+        RealmList<PotoRealm> potoRealms=new RealmList<>();
+        for (Photo photos:photo){
+            PotoRealm photoRealm1 = new PotoRealm();
+            photoRealm1.setIconUrl(photos.getIconSources());
+            potoRealms.add(photoRealm1);
+        }
+        return potoRealms;
+    }
+        }
+
+

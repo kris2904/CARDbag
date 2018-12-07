@@ -15,13 +15,16 @@ import java.util.List;
 public class CardAdapter extends RecyclerView.Adapter<CardVH> {
 
     private LayoutInflater inflater;
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
     Context context;
 
-    public CardAdapter(Context context, List<Card> cards) {
+    public CardAdapter(Context context) {
         this.context = context;
-        this.cards = cards;
         this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     @NonNull
@@ -37,13 +40,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardVH> {
 
         PhotoAdapter phAdapter = new PhotoAdapter(context, cardItem.getPhoto());
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-       // DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(recyclerView.getContext(),
-           //     layoutManager.getOrientation());
-       // cardVH.addItemDecoration(dividerItemDecoration);
+
         cardVH.rvPhoto.setLayoutManager(layoutManager);
         cardVH.rvPhoto.setAdapter(phAdapter);
         cardVH.tvCardName.setText(cardItem.getName());
-        cardVH.tvCardCategory.setText(cardItem.getCategory());
+        cardVH.tvCardCategory.setText(cardItem.getCategory().getName());
         cardVH.tvCardDiscount.setText("Скидка " + cardItem.getDiscount() + "%");
     }
 

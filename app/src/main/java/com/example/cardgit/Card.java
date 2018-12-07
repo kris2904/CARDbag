@@ -3,13 +3,33 @@ package com.example.cardgit;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class   Card implements Serializable
  {
+     public int getId() {
+         return id;
+     }
 
+     public Card() {
+     }
+
+     public Card(int id, String name, Category category, String discount, List<Photo> photo) {
+         this.id = id;
+         this.name = name;
+         this.category = category;
+         this.discount = discount;
+         this.photo = photo;
+     }
+
+     public void setId(int id) {
+         this.id = id;
+     }
+
+     private int id;
     private String name;
-    private String category;
+    private Category category;
     private String discount;
     private List<Photo> photo;
 
@@ -20,7 +40,7 @@ public class   Card implements Serializable
       return photo;
     }
 
-    public void setPhoto(List<Photo> photo) {
+    public void setPhoto(ArrayList<Photo> photo) {
         this.photo = photo;
     }
 
@@ -32,11 +52,11 @@ public class   Card implements Serializable
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
