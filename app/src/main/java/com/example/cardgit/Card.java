@@ -6,42 +6,31 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class   Card implements Serializable
- {
-     public int getId() {
-         return id;
-     }
+public class   Card implements Serializable {
 
-     public Card() {
-     }
+    public Card(int id, String name, Category category, String discount, List<Photo> photo) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.discount = discount;
+        this.photo = photo;
+    }
 
-     public Card(int id, String name, Category category, String discount, List<Photo> photo) {
-         this.id = id;
-         this.name = name;
-         this.category = category;
-         this.discount = discount;
-         this.photo = photo;
-     }
-
-     public void setId(int id) {
-         this.id = id;
-     }
-
-     private int id;
+    private int id;
     private String name;
     private Category category;
     private String discount;
-    private List<Photo> photo;
 
+    public Card() {
 
-
-
-     public List<Photo> getPhoto() {
-      return photo;
     }
 
-    public void setPhoto(ArrayList<Photo> photo) {
-        this.photo = photo;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -67,4 +56,14 @@ public class   Card implements Serializable
     public void setDiscount(String discount) {
         this.discount = discount;
     }
+
+    public List<Photo> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(List<Photo> photo) {
+        this.photo = photo;
+    }
+
+    public List<Photo> photo;
 }

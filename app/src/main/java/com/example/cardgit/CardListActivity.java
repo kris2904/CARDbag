@@ -139,7 +139,7 @@ public class CardListActivity extends AppCompatActivity {
         List<Photo> photos = new ArrayList<>();
         for (PotoRealm photoRealm : realmList) {
             Photo photo = new Photo(
-                    photoRealm.getIconUrl()
+                    photoRealm.getImgID()
             );
             photos.add(photo);
         }

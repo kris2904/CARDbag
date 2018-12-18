@@ -39,7 +39,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoVH>{
     @Override
     public void onBindViewHolder(@NonNull PhotoVH photoVH, int position) {
         final Photo photo = photoList.get(position);
-        photoVH.ivPhoto.setImageResource(photo.getIconSources());
+        photoVH.ivPhoto.setImageResource(context.getResources().getDrawable(photo.getIconSources()));
 
 
     }
@@ -47,5 +47,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoVH>{
     @Override
     public int getItemCount() {
         return photoList.size();
+    }
+    public void setPhotosList(List<Photo> photosList) {
+        this.photoList = photosList;
     }
 }

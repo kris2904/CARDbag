@@ -6,16 +6,14 @@ import io.realm.annotations.PrimaryKey;
 public class PotoRealm extends RealmObject {
 
 
-    public void setIconUrl(int iconUrl) {
-        this.iconUrl = iconUrl;
-    }
-
-    public int getIconUrl() {
-        return iconUrl;
-    }
-
     @PrimaryKey
-    private  int iconUrl;
+    private  long imgID;
 
+    public long getImgID() {
+        return imgID;
+    }
 
+    public void setImgID(long imgID) {
+        this.imgID = imgID;
+    }
 }
