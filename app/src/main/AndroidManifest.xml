@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cardgit">
+    package="com.example.cardgit"><uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".CardAddActivity"/>
         <activity android:name=".CategoryListActivity"/>
+
+
     </application>
 
 </manifest>

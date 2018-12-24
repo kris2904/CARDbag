@@ -27,15 +27,13 @@ import io.realm.Realm;
 import io.realm.RealmList;
 
 public class CardAddActivity extends AppCompatActivity {
-
-
     private Toolbar toolbar;
     private Card card;
     private EditText edName;
     private EditText edCategory;
     private EditText edDiscount;
-    private static int REQUEST_CODE_FRONT_PHOTO = 1;
-    private static int REQUEST_CODE_BACK_PHOTO =2;
+    private static final int REQUEST_CODE_FRONT_PHOTO = 1;
+    private static final int REQUEST_CODE_BACK_PHOTO =2;
 
     private static final int ADD_CATEGORY = 0;
     ImageView ivPhotoFront ;
@@ -94,7 +92,7 @@ public class CardAddActivity extends AppCompatActivity {
         // Запускаем приложения и ожидаем результат
         startActivityForResult(chooserIntent, requestCode);}
 
-        private void showImage(int requestCode, Intent data) {
+    private void showImage(int requestCode, Intent data) {
         try {
             //Получаем URI изображения, преобразуем его в Bitmap
             //объект и отображаем в элементе ImageView нашего интерфейса:
@@ -145,105 +143,105 @@ public class CardAddActivity extends AppCompatActivity {
 
 
     @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            switch (item.getItemId()) {
-                case android.R.id.home:
-                    onBackPressed();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
-
-        public void onClick (View view){
-            card.setName(edName.getText().toString());
-            //card.setCategory(edCategory.getText().toString());
-            card.setDiscount(edDiscount.getText().toString());
-
-
-            ArrayList<Photo> photos = new ArrayList<>();
-            photos.add(new Photo(R.drawable.lenta));
-            photos.add(new Photo(R.drawable.lenta));
-            card.setPhoto(photos);
-
-            Random random = new Random();
-            int id = random.nextInt(2000);
-            card.setId(id);
-            Intent intent = new Intent(this, CardListActivity.class);
-            intent.putExtra(Card.class.getSimpleName(), card);
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-
-        public void etCategory (View view){
-            Intent intent = new Intent(this, CategoryListActivity.class);
-            startActivityForResult(intent, ADD_CATEGORY);
-        }
-        private void addCard (Card card){
-
-            Realm realm = Realm.getDefaultInstance();
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    realm.copyToRealmOrUpdate(map2Realm(card));
-
-                }
-            });
-        }
-        private CardRealm map2Realm (Card card){
-            CardRealm cardRealm = new CardRealm();
-            cardRealm.setId(card.getId());
-            cardRealm.setName(card.getName());
-            cardRealm.setDiscount(card.getDiscount());
-            cardRealm.setCategory(categoreMap2Realm(card.getCategory()));
-            return cardRealm;
-        }
-        private CategoryRealm categoreMap2Realm (Category category){
-            CategoryRealm categoryRealm = new CategoryRealm();
-            categoryRealm.setId(category.getId());
-            categoryRealm.setName(category.getName());
-            return categoryRealm;
-        }
-
-        @Override
-        protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
-            super.onActivityResult(requestCode, resultCode, data);
-
-
-                switch (requestCode) {
-                    case ADD_CATEGORY:
-                        if (resultCode == RESULT_OK) {
-                        Bundle arg = data.getExtras();
-                        if (arg == null) {
-                            return;
-                        }
-
-                        Category category = (Category) arg.getSerializable(Category.class.getSimpleName());
-                        if (category == null) {
-                            return;
-                        }
-                        String nameCateg = category.getName();
-                        edCategory.setText(nameCateg);
-                        card.setCategory(category);
-                }
-                break;
-                    case REQUEST_CODE_FRONT_PHOTO:
-                    case REQUEST_CODE_BACK_PHOTO:
-                        showImage(requestCode,data);
-                        break;
-
-
-
-            }
-
-        }
-        private RealmList<PotoRealm> potoMap2Realm (List < Photo > photo) {
-            RealmList<PotoRealm> potoRealms = new RealmList<>();
-            for (Photo photos : photo) {
-                PotoRealm photoRealm1 = new PotoRealm();
-                photoRealm1.setIconUrl(photos.getIconSources());
-                potoRealms.add(photoRealm1);
-            }
-            return potoRealms;
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
+
+    public void onClick (View view){
+        card.setName(edName.getText().toString());
+        //card.setCategory(edCategory.getText().toString());
+        card.setDiscount(edDiscount.getText().toString());
+
+
+        ArrayList<Photo> photos = new ArrayList<>();
+        photos.add(new Photo(R.drawable.lenta));
+        photos.add(new Photo(R.drawable.lenta));
+        card.setPhoto(photos);
+
+        Random random = new Random();
+        int id = random.nextInt(2000);
+        card.setId(id);
+        Intent intent = new Intent(this, CardListActivity.class);
+        intent.putExtra(Card.class.getSimpleName(), card);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    public void etCategory (View view){
+        Intent intent = new Intent(this, CategoryListActivity.class);
+        startActivityForResult(intent, ADD_CATEGORY);
+    }
+    private void addCard (Card card){
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(map2Realm(card));
+
+            }
+        });
+    }
+    private CardRealm map2Realm (Card card){
+        CardRealm cardRealm = new CardRealm();
+        cardRealm.setId(card.getId());
+        cardRealm.setName(card.getName());
+        cardRealm.setDiscount(card.getDiscount());
+        cardRealm.setCategory(categoreMap2Realm(card.getCategory()));
+        return cardRealm;
+    }
+    private CategoryRealm categoreMap2Realm (Category category){
+        CategoryRealm categoryRealm = new CategoryRealm();
+        categoryRealm.setId(category.getId());
+        categoryRealm.setName(category.getName());
+        return categoryRealm;
+    }
+
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        switch (requestCode) {
+            case ADD_CATEGORY:
+                if (resultCode == RESULT_OK) {
+                    Bundle arg = data.getExtras();
+                    if (arg == null) {
+                        return;
+                    }
+
+                    Category category = (Category) arg.getSerializable(Category.class.getSimpleName());
+                    if (category == null) {
+                        return;
+                    }
+                    String nameCateg = category.getName();
+                    edCategory.setText(nameCateg);
+                    card.setCategory(category);
+                }
+                break;
+            case REQUEST_CODE_FRONT_PHOTO:
+            case REQUEST_CODE_BACK_PHOTO:
+                showImage(requestCode,data);
+                break;
+
+
+
+        }
+
+    }
+    private RealmList<PotoRealm> potoMap2Realm (List < Photo > photo) {
+        RealmList<PotoRealm> potoRealms = new RealmList<>();
+        for (Photo photos : photo) {
+            PotoRealm photoRealm1 = new PotoRealm();
+            photoRealm1.setImgID(photos.getIconSources());
+            potoRealms.add(photoRealm1);
+        }
+        return potoRealms;
+    }
+}
